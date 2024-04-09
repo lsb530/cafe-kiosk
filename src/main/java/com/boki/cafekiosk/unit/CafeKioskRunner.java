@@ -1,5 +1,8 @@
 package com.boki.cafekiosk.unit;
 
+import com.boki.cafekiosk.unit.beverage.Americano;
+import com.boki.cafekiosk.unit.beverage.Latte;
+
 public class CafeKioskRunner {
     public static void main(String[] args) {
         CafeKiosk cafeKiosk = new CafeKiosk();

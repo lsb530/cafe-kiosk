@@ -1,12 +1,39 @@
 package com.boki.cafekiosk.unit;
 
+import com.boki.cafekiosk.unit.beverage.Beverage;
+import com.boki.cafekiosk.unit.order.Order;
+import lombok.Getter;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
 public class CafeKiosk {
 
-    public void add(Beverage beverage) {
+    private final List<Beverage> beverages = new ArrayList<>();
 
+    public void add(Beverage beverage) {
+        beverages.add(beverage);
+    }
+
+    public void remove(Beverage beverage) {
+        beverages.remove(beverage);
+    }
+
+    public void clear() {
+        beverages.clear();
     }
 
     public int calculateTotalPrice() {
-        return 0;
+        int totalPrice = 0;
+        for (Beverage beverage : beverages) {
+            totalPrice += beverage.getPrice();
+        }
+        return totalPrice;
+    }
+
+    public Order createOrder() {
+        return new Order(LocalDateTime.now(), beverages);
     }
 }
