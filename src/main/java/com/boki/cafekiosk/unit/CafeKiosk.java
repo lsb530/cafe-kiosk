@@ -39,7 +39,25 @@ public class CafeKiosk {
         beverages.clear();
     }
 
+    // TDD - Test Driven Development
     public int calculateTotalPrice() {
+        // return 0; // RED
+        // return 8500; // GREEN
+
+        /* REFACTOR - BLUE */
+        // int totalPrice = 0;
+        // for (Beverage beverage : beverages) {
+        //     totalPrice += beverage.getPrice();
+        // }
+        // return totalPrice;
+
+        /* REFACTOR - BLUE */
+        return beverages.stream()
+                .mapToInt(Beverage::getPrice)
+                .sum();
+    }
+
+    public int calculateTotalPriceReal() { // TDD로 대체
         int totalPrice = 0;
         for (Beverage beverage : beverages) {
             totalPrice += beverage.getPrice();
