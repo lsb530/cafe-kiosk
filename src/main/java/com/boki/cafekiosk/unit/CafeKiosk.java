@@ -44,14 +44,14 @@ public class CafeKiosk {
         // return 0; // RED
         // return 8500; // GREEN
 
-        /* REFACTOR - BLUE */
+        /* REFACTORING - BLUE */
         // int totalPrice = 0;
         // for (Beverage beverage : beverages) {
         //     totalPrice += beverage.getPrice();
         // }
         // return totalPrice;
 
-        /* REFACTOR - BLUE */
+        /* REFACTORING - BLUE */
         return beverages.stream()
                 .mapToInt(Beverage::getPrice)
                 .sum();
