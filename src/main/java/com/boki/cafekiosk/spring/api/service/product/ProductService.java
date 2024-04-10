@@ -1,10 +1,8 @@
 package com.boki.cafekiosk.spring.api.service.product;
 
-import com.boki.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import com.boki.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import com.boki.cafekiosk.spring.domain.product.Product;
 import com.boki.cafekiosk.spring.domain.product.ProductRepository;
-import com.boki.cafekiosk.spring.domain.product.ProductSellingStatus;
-import com.boki.cafekiosk.spring.domain.product.ProductType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,8 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.boki.cafekiosk.spring.domain.product.ProductSellingStatus.*;
-import static com.boki.cafekiosk.spring.domain.product.ProductType.*;
+import static com.boki.cafekiosk.spring.domain.product.ProductSellingStatus.forDisplay;
 
 /**
  * readOnly = true : 읽기전용
@@ -33,7 +30,7 @@ public class ProductService {
     // 동시성 이슈
     // UUID
     @Transactional
-    public ProductResponse createProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
         String nextProductNumber = createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);
