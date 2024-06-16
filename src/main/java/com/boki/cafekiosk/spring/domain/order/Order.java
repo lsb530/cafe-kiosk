@@ -5,6 +5,7 @@ import com.boki.cafekiosk.spring.domain.orderproduct.OrderProduct;
 import com.boki.cafekiosk.spring.domain.product.Product;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,8 +33,9 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // 연관관계 주인
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
-    public Order(List<Product> products, LocalDateTime registerDt) {
-        this.orderStatus = OrderStatus.INIT;
+    @Builder
+    public Order(List<Product> products, OrderStatus orderStatus, LocalDateTime registerDt) {
+        this.orderStatus = orderStatus;
         this.totalPrice = calculateTotalPrice(products);
         this.registerDt = registerDt;
         this.orderProducts = products.stream()
@@ -42,7 +44,11 @@ public class Order extends BaseEntity {
     }
 
     public static Order create(List<Product> products, LocalDateTime registerDt) {
-        return new Order(products, registerDt);
+        return Order.builder()
+                .orderStatus(OrderStatus.INIT)
+                .products(products)
+                .registerDt(registerDt)
+                .build();
     }
 
     private int calculateTotalPrice(List<Product> products) {
