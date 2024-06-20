@@ -1,5 +1,6 @@
 package com.boki.cafekiosk.spring.api.controller.product;
 
+import com.boki.cafekiosk.spring.ControllerTestSupport;
 import com.boki.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
 import com.boki.cafekiosk.spring.api.service.product.ProductResponse;
 import com.boki.cafekiosk.spring.api.service.product.ProductService;
@@ -23,17 +24,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@WebMvcTest(controllers = ProductController.class) // 컨트롤러 관련 빈만 띄움
-class ProductControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private ProductService productService;
+class ProductControllerTest extends ControllerTestSupport {
 
     @DisplayName("신규 상품을 등록한다.")
     @Test

@@ -1,5 +1,6 @@
 package com.boki.cafekiosk.spring.api.controller.order;
 
+import com.boki.cafekiosk.spring.ControllerTestSupport;
 import com.boki.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import com.boki.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
 import com.boki.cafekiosk.spring.api.service.order.OrderService;
@@ -24,16 +25,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@WebMvcTest(controllers = OrderController.class)
-class OrderControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private OrderService orderService;
+class OrderControllerTest extends ControllerTestSupport {
 
     @DisplayName("신규 주문을 등록한다.")
     @Test
