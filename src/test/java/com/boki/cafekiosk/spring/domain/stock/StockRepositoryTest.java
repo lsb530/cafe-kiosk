@@ -1,5 +1,7 @@
 package com.boki.cafekiosk.spring.domain.stock;
 
+import com.boki.cafekiosk.spring.IntegrationTestSupport;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("test")
-@DataJpaTest
-class StockRepositoryTest {
+//@ActiveProfiles("test")
+//@DataJpaTest
+@Transactional
+class StockRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private StockRepository stockRepository;

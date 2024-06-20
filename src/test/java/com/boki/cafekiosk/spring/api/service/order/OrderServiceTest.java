@@ -1,5 +1,6 @@
 package com.boki.cafekiosk.spring.api.service.order;
 
+import com.boki.cafekiosk.spring.IntegrationTestSupport;
 import com.boki.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import com.boki.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import com.boki.cafekiosk.spring.api.service.order.response.OrderResponse;
@@ -27,11 +28,9 @@ import static com.boki.cafekiosk.spring.domain.product.ProductType.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("test")
 // @Transactional // 자동 롤백해줌 - but 문제 생길 수 있음(서비스에 대한 체크를 깜빡할 수 있음)
-@SpringBootTest
 // @DataJpaTest
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;

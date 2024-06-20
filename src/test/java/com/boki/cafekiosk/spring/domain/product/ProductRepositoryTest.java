@@ -1,5 +1,7 @@
 package com.boki.cafekiosk.spring.domain.product;
 
+import com.boki.cafekiosk.spring.IntegrationTestSupport;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,11 @@ import static com.boki.cafekiosk.spring.domain.product.ProductType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 // @SpringBootTest
-@DataJpaTest // SBT와 비슷한데, Jpa와 관련된 빈들만 올려서 더 가볍다
-class ProductRepositoryTest {
+//@DataJpaTest // SBT와 비슷한데, Jpa와 관련된 빈들만 올려서 더 가볍다
+@Transactional
+class ProductRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;
