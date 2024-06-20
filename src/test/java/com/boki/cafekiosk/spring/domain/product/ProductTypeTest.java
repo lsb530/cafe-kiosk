@@ -53,7 +53,7 @@ class ProductTypeTest {
         boolean result3 = ProductType.containsStockType(givenType3);
 
         // then
-        assertThat(result1).isTrue();
+        assertThat(result1).isFalse();
         assertThat(result2).isTrue();
         assertThat(result3).isTrue();
     }
