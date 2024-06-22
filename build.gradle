@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.asciidoctor.jvm.convert' version '4.0.2' // 3.3.2
 }
 
 group = 'com.boki'
@@ -15,6 +16,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    asciidoctorExt // asciidoctor extensions에 대한 설정주입
 }
 
 repositories {
@@ -39,8 +41,34 @@ dependencies {
 
     // Guava
     implementation 'com.google.guava:guava:33.2.1-jre'
+
+    // RestDocs
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+ext { // 전역 변수
+    snippetsDir = file('build/generated-snippets') // 문서(코드)조각 경로 지정
+}
+
+test {
+    outputs.dir snippetsDir // 테스트가 끝난 결과물을 이 snipeetsDir로 설정
+}
+
+asciidoctor {
+    inputs.dir snippetsDir // asciidoctor가 작동할 스니펫 위치
+    configurations 'asciidoctorExt' // 플러그인 설정
+
+    dependsOn test // test가 수행된 다음에 이 태스크 수행
+}
+
+bootJar {
+    dependsOn asciidoctor // 의존성
+    from("${asciidoctor.outputDir}") { // 문서가 나올때 정적파일로 보기 위해서 파일복사
+        into 'static/docs'
+    }
 }
