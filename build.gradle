@@ -63,6 +63,11 @@ asciidoctor {
     inputs.dir snippetsDir // asciidoctor가 작동할 스니펫 위치
     configurations 'asciidoctorExt' // 플러그인 설정
 
+    sources { // 특정 파일을 html로 만든다
+        include ("**/index.adoc")
+    }
+
+    baseDirFollowsSourceFile() // 다른 adoc 파일을 include 할 때 경로를 baseDir로 설정
     dependsOn test // test가 수행된 다음에 이 태스크 수행
 }
 
